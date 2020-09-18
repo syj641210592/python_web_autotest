@@ -5,9 +5,7 @@ class TestPath(object):
 
     def __init__(self) :
         self.BasePth = os.getcwd()
-        self.WebDrive = os.path.join(os.sep, self.BasePth, config.get("ENV", "drive_path"))
-        self.Brown = config.get("ENV", "brown_path").replace("\\", os.sep)
-        print(self.WebDrive, self.Brown)
+        self.ScreenShot = os.path.join(os.sep, self.BasePth, "screenshot")
 
 
 testpath = TestPath()
