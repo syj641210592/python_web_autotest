@@ -1,16 +1,18 @@
 '''
 Author: sunwang
 Date: 2020-09-26 06:20:47
-LastEditTime: 2020-09-26 07:48:05
+LastEditTime: 2020-09-30 06:45:25
 LastEditors: sunwang
 Description: web自动化
 FilePath: \python_web_autotest\testcase\testcase_login.py
 '''
 
+from logging import exception
 import selenium
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from html_page.login_page import LoginPage
 from com_func.confread import config
 from selenium.webdriver import Edge 
 import unittest
@@ -23,48 +25,31 @@ test_data = [
     {"title": "账户密码正确", "phone": "18684720553", "pwd": "python","xpath":"//a[text()='%s']", "expected": "我的帐户[python]"}
 ]
 
-test_data_sucess = [
-    
-]
+
 
 @ddt.ddt
 class Test_login(unittest.TestCase):
     '''
-    description: 
+    description: 网页登录用例类
     param : 
     return {type} 
     '''
     @classmethod
     def setUpClass(cls):
-        # 设置访问地址
-        cls.url = r'http://120.78.128.25:8765/Index/login.html'
-        # 初始化浏览器
-        cls.driver = Edge(executable_path=config.get('ENV', 'drive_path'))
-        # 最大化窗口
-        cls.driver.maximize_window()
-        # 设置隐性等待
-        cls.driver.implicitly_wait(10)
+        driver = Edge(exception=config.get("ENV", "drive_path"))
+        url = r'http://120.78.128.25:8765/Index/login.html'
+        cls.login = LoginPage(driver, url)
     
     def setUp(self):
-        self.driver.get(self.url)
+        self.login.fresh()
     
 
     @ddt.data(*test_data)
     @ddt.unpack
     def test_login(self, title, **kwargs):
         '''{title}'''
-        # 输入账号
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located((By.XPATH, r'//input[@name = "phone"]'))
-        ).send_keys(kwargs['phone'])
-        # 输入密码
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located((By.XPATH, r'//input[@name = "password"]'))
-        ).send_keys(kwargs['pwd'])
-        # 点击登录
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located((By.XPATH, r'//button[text()= "登录"]'))
-        ).click()
+        self.login.login(kwargs['phone'], kwargs['pwd'])
+        res_ele = self.login.
         # 校验结果
         try:
             ele = self.driver.find_element(By.XPATH,  kwargs['xpath'] % kwargs['expected'])
