@@ -1,17 +1,12 @@
 '''
 Author: sunwang
 Date: 2020-09-26 06:20:47
-LastEditTime: 2020-09-30 06:45:25
+LastEditTime: 2020-09-30 23:26:42
 LastEditors: sunwang
 Description: web自动化
 FilePath: \python_web_autotest\testcase\testcase_login.py
 '''
 
-from logging import exception
-import selenium
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
 from html_page.login_page import LoginPage
 from com_func.confread import config
 from selenium.webdriver import Edge 
@@ -36,8 +31,8 @@ class Test_login(unittest.TestCase):
     '''
     @classmethod
     def setUpClass(cls):
-        driver = Edge(exception=config.get("ENV", "drive_path"))
-        url = r'http://120.78.128.25:8765/Index/login.html'
+        driver = Edge(executable_path=config.get("ENV", "drive_path"))
+        url = config.get("URL", "login_url")
         cls.login = LoginPage(driver, url)
     
     def setUp(self):
@@ -49,20 +44,15 @@ class Test_login(unittest.TestCase):
     def test_login(self, title, **kwargs):
         '''{title}'''
         self.login.login(kwargs['phone'], kwargs['pwd'])
-        res_ele = self.login.
-        # 校验结果
-        try:
-            ele = self.driver.find_element(By.XPATH,  kwargs['xpath'] % kwargs['expected'])
-        except Exception as e:
-            ele = ""
-        finally:
-            self.assertTrue(ele)
+        res_ele = self.login.find_ele("XPATH", kwargs['xpath'], kwargs['expected'])
+        self.assertTrue(res_ele)
     
     def tearDown(self):
         pass
+
     @classmethod
     def tearDownClass(cls):
-        cls.driver.quit()
+        cls.login.driver.quit()
     
 
 
