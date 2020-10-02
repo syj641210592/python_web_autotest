@@ -8,4 +8,7 @@ class TestPath(object):
         self.ScreenShot = os.path.join(os.sep, self.BasePath, "screenshot")
         self.ReportPath = os.path.join(os.sep, self.BasePath, config.get("ENV", "report_path"))
         self.LogDirPath = os.path.join(os.sep, self.BasePath, config.get("ENV", "log_path"))
+        self.TestData = os.path.join(os.sep, self.BasePath, "test_case_data", "case_data.yaml")
+
+
 testpath = TestPath()

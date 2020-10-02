@@ -1,24 +1,29 @@
 '''
 Author: sunwang
 Date: 2020-09-26 06:20:47
-LastEditTime: 2020-09-30 23:26:42
+LastEditTime: 2020-10-02 09:37:45
 LastEditors: sunwang
 Description: web自动化
 FilePath: \python_web_autotest\testcase\testcase_login.py
 '''
 
 from html_page.login_page import LoginPage
+from com_func.basepath import testpath
 from com_func.confread import config
 from selenium.webdriver import Edge 
 import unittest
 import ddt
+import yaml
+import pytest
 
-test_data = [
-    {"title": "账户密码错误_账户错误", "phone": "13018977985", "pwd": "python","xpath":"//div[text()='%s']", "expected": "帐号或密码错误!"},
-    {"title": "账户密码错误_账户为空", "phone": "", "pwd": "python","xpath":"//div[text()='%s']", "expected": "请输入手机号"},
-    {"title": "账户密码错误_密码为空", "phone": "13018977985", "pwd": "","xpath":"//div[text()='%s']", "expected": "请输入密码"},
-    {"title": "账户密码正确", "phone": "18684720553", "pwd": "python","xpath":"//a[text()='%s']", "expected": "我的帐户[python]"}
-]
+
+
+@pytest.fixture(autouse=True)
+def case_setup():
+    print("---测试用例执行的前置---")
+    yield  # 分割前后置的 yeild之前是前置方法，yeild之后是后置
+    print("---测试用例执行的后置---")
+
 
 
 
@@ -29,22 +34,26 @@ class Test_login(unittest.TestCase):
     param : 
     return {type} 
     '''
+    test_data = yaml.load(open(testpath.TestData, encoding="utf-8"), Loader=yaml.FullLoader)["test_data"]
+
+
     @classmethod
     def setUpClass(cls):
         driver = Edge(executable_path=config.get("ENV", "drive_path"))
-        url = config.get("URL", "login_url")
-        cls.login = LoginPage(driver, url)
-    
+        driver.maximize_window()
+        driver.implicitly_wait(10)
+        cls.loginpage= LoginPage(driver)
+
     def setUp(self):
-        self.login.fresh()
+        self.loginpage.fresh()
     
 
     @ddt.data(*test_data)
     @ddt.unpack
     def test_login(self, title, **kwargs):
         '''{title}'''
-        self.login.login(kwargs['phone'], kwargs['pwd'])
-        res_ele = self.login.find_ele("XPATH", kwargs['xpath'], kwargs['expected'])
+        self.loginpage.login(kwargs['phone'], kwargs['pwd'])
+        res_ele = self.loginpage.find_ele(pat=kwargs['xpath'],pat_params=kwargs['expected'])
         self.assertTrue(res_ele)
     
     def tearDown(self):
@@ -52,7 +61,7 @@ class Test_login(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.login.driver.quit()
+        cls.loginpage.quit_driver()
     
 
 

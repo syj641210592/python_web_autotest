@@ -2,7 +2,7 @@
 Description: 
 Author: sunwang
 Date: 2020-09-30 23:28:01
-LastEditTime: 2020-10-01 12:02:09
+LastEditTime: 2020-10-02 06:48:54
 LastEditors: sunwang
 '''
 from logging.handlers import RotatingFileHandler
@@ -21,7 +21,7 @@ def logger_create():
     mat = "%(asctime)s - [%(filename)s-->line:%(lineno)d] - %(levelname)s: %(message)s"
     logger_mat = logging.Formatter(mat)
     # 输出日志到文件
-    handler_file  = RotatingFileHandler(os.path.join(os.sep, testpath.LogDirPath, "log.txt"), maxBytes = 1*1024,backupCount = 3)
+    handler_file  = RotatingFileHandler(os.path.join(os.sep, testpath.LogDirPath, "log.txt"), maxBytes = 10*1024,backupCount = 5)
     handler_file.setLevel(config.get("LOG", "output_level"))
     handler_file.setFormatter(logger_mat)
     # 输出日志到控制台

@@ -13,7 +13,7 @@ from com_func.log import logger
 
 
 class BasePage(object):
-    def __init__(self, driver, url, sleep_time):
+    def __init__(self, driver):
         '''
         description:基础页面初始化 
         param : {
@@ -22,25 +22,12 @@ class BasePage(object):
         }
         '''
         self.driver = driver
-        self.url = url
-        self._open(sleep_time)
     
-    def _open(self, sleep_time):
-        '''初始化打开浏览器'''
-        # 打开浏览器
-        self.driver.get(self.url)
-        self.driver.maximize_window()
-        # 设置隐性等待
-        self.driver.implicitly_wait(sleep_time)
-
     def fresh(self, url=""):
         '''刷新网页'''
-        if url != "":
-            self.driver.get(url)
-        else:
-            self.driver.get(self.url)
+        self.driver.get(url)
 
-    def find_ele(self, method, pat, pat_params="", type="located", wait_time=5):
+    def find_ele(self, method="XPATH", pat="", pat_params="", type="located", wait_time=5):
         '''查找页面元素'''
         try:
             if pat_params != "":
@@ -57,3 +44,6 @@ class BasePage(object):
         '''输入文本'''
         self.ele.clear()
         self.ele.send_keys(send_text)
+
+    def quit_driver(self):
+        self.driver.quit()
