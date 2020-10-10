@@ -2,7 +2,7 @@
 Description: wen自动化
 Author: sunwang
 Date: 2020-09-14 21:04:05
-LastEditTime: 2020-10-10 22:53:32
+LastEditTime: 2020-10-10 23:20:22
 LastEditors: sunwang
 '''
 # from testcase import test_case_login
@@ -24,4 +24,4 @@ LastEditors: sunwang
 #     run.run()
 
 import pytest
-pytest.main(['-s', '-v'])
+pytest.main(['-s', '-v', "--html", "report.html"])

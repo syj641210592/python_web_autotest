@@ -1,11 +1,12 @@
 '''
 Author: sunwang
 Date: 2020-09-26 06:20:47
-LastEditTime: 2020-10-10 22:58:33
+LastEditTime: 2020-10-10 23:12:19
 LastEditors: sunwang
 Description: web自动化
 FilePath: \python_web_autotest\testcase\testcase_login.py
 '''
+
 
 from com_func.basepath import testpath
 import yaml
