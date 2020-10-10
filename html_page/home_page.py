@@ -19,3 +19,8 @@ class HomePage(BasePage):
     def is_login(self, user):
         '''判断用户已经登录'''
         self.find_ele("XPATH", r"//a[text()='%s']"%(user))
+
+    def quit_login(self, user):
+        '''退出登录'''
+        self.find_ele("XPATH", r"//a[text()='%s']"%(user)).click()
+        

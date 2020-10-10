@@ -17,7 +17,7 @@ class LoginPage(BasePage):
 
     def fresh(self):
         '''刷新网页'''
-        super().fresh(config.get("URL", "login_url"))
+        super().fresh(config.get("URL", "base_url")+config.get("URL", "login_url"))
 
     def login(self, user, pwd):
         '''登录'''
