@@ -1,4 +1,4 @@
-test_data: 
+test_login_data: 
   - title: 账户密码错误_账户错误
     phone: 13018977985
     pwd: python
@@ -23,3 +23,9 @@ test_data:
     xpath: //a[text()='%s']
     expected: 我的帐户[python]
 
+test_home_data: 
+  - title: 账户密码错误_账户错误
+    phone: 13018977985
+    pwd: python
+    xpath: //div[text()='%s']
+    expected: 帐号或密码错误!

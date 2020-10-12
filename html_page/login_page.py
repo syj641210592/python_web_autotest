@@ -2,7 +2,7 @@
 Description: 登录页面功能操作
 Author: sunwang
 Date: 2020-09-29 22:40:38
-LastEditTime: 2020-10-01 16:05:04
+LastEditTime: 2020-10-12 23:41:49
 LastEditors: sunwang
 '''
 from html_page.page_locator import locator_login

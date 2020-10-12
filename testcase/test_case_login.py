@@ -1,14 +1,15 @@
 '''
+Description: 登录测试用例类
 Author: sunwang
 Date: 2020-09-26 06:20:47
-LastEditTime: 2020-10-10 23:12:19
+LastEditTime: 2020-10-12 22:38:29
 LastEditors: sunwang
-Description: web自动化
-FilePath: \python_web_autotest\testcase\testcase_login.py
 '''
 
 
+
 from com_func.basepath import testpath
+from com_func.log import logger
 import yaml
 import pytest
 
@@ -19,16 +20,22 @@ class Test_login():
     param : 
     return {type} 
     '''
-    test_data = yaml.load(open(testpath.TestData, encoding="utf-8"), Loader=yaml.FullLoader)["test_data"]
+    test_data = yaml.load(open(testpath.TestData, encoding="utf-8"), Loader=yaml.FullLoader)["test_login_data"]
 
     @pytest.mark.parametrize('kwargs', test_data)
-    def test_login(self, kwargs, login_setup_class, login_setup):
+    def test_login(self, kwargs, login_setup_class, page_setup):
         '''{kwargs["title"]}'''
+        # 接收和执行类级别前后置
         self.loginpage = login_setup_class
-        login_setup(self.loginpage)
+        # 执行带入参用例级别前置
+        page_setup(self.loginpage)
         self.loginpage.login(kwargs['phone'], kwargs['pwd'])
         res_ele = self.loginpage.find_ele(pat=kwargs['xpath'],pat_params=kwargs['expected'])
-        assert res_ele
+        try:
+            assert res_ele
+        except Exception as e:
+            logger.error(f"执行用例失败{kwargs['title']}失败", exc_info=True)
+            raise AssertionError
     
     
 
