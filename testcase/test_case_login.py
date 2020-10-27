@@ -23,12 +23,12 @@ class Test_login():
     test_data = yaml.load(open(testpath.TestData, encoding="utf-8"), Loader=yaml.FullLoader)["test_login_data"]
 
     @pytest.mark.parametrize('kwargs', test_data)
-    def test_login(self, kwargs, login_setup_class, page_setup):
+    def test_login(self, kwargs, login_setup_class, login_setup):
         '''{kwargs["title"]}'''
         # 接收和执行类级别前后置
         self.loginpage = login_setup_class
         # 执行带入参用例级别前置
-        page_setup(self.loginpage)
+        login_setup(self.loginpage)
         self.loginpage.login(kwargs['phone'], kwargs['pwd'])
         res_ele = self.loginpage.find_ele(pat=kwargs['xpath'],pat_params=kwargs['expected'])
         try:

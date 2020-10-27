@@ -23,12 +23,12 @@ class Test_invest():
     test_data = yaml.load(open(testpath.TestData, encoding="utf-8"), Loader=yaml.FullLoader)["test_invest_data"]
 
     @pytest.mark.parametrize('kwargs', test_data)
-    def test_login(self, kwargs, home_setup_class, page_setup):
+    def test_login(self, kwargs, inverst_setup_class, inverst_setup):
         '''{kwargs["title"]}'''
         # 接收和执行类级别前后置
-        self.homepage = home_setup_class
+        self.homepage = inverst_setup_class
         # 执行带入参用例级别前置
-        page_setup(self.homepage)
+        inverst_setup(self.homepage)
 
     
 
