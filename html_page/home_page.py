@@ -25,20 +25,6 @@ class HomePage(BasePage):
     def inverst(self):
         '''抢投标'''
         self.find_ele(*locator_home.invest).click()     
-
-    def input_money(self, money):
-        '''输入金额'''
-        self.find_ele(*locator_home.money_input).send_keys(money)
-
-    def tender_click(self, money):
-        '''投标金额'''
-        self.find_ele(*locator_home.tender_button).click()
-
-    def get_tender_money(self, money):
-        '''投标金额'''
-        money = self.find_ele(*locator_home.tender_money).get_attribute("placeholder")
-        money = re.search(r".+?(\d+)元$", str(money)).group(1).replace(",","")
-        return money
         
     def quit_login(self):
         '''退出登录'''
