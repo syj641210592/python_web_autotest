@@ -40,9 +40,9 @@ class InverstPage(BasePage):
 
     def get_success_windows_info(self):
         '''获取投资成功提示窗口'''
-        self.find_ele(*locator_inverst.success_windows)
+        self.find_ele(*locator_inverst.success_windows).text
 
     def get_success_windows_onclick(self):
-        '''获取投资成功提示窗口'''
+        '''点击投资成功提示窗口'''
         self.find_ele(*locator_inverst.success_windows_onclick).click()
         
