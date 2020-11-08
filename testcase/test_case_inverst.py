@@ -2,7 +2,7 @@
 Description: 投资测试用例类
 Author: sunwang
 Date: 2020-10-12 22:02:37
-LastEditTime: 2020-10-12 22:03:28
+LastEditTime: 2020-11-08 22:54:01
 LastEditors: sunwang
 '''
 
@@ -23,12 +23,12 @@ class Test_invest():
     test_data = yaml.load(open(testpath.TestData, encoding="utf-8"), Loader=yaml.FullLoader)["test_invest_data"]
 
     @pytest.mark.parametrize('kwargs', test_data)
-    def test_login(self, kwargs, inverst_setup_class, inverst_setup):
+    def test_login(self, kwargs, inverst_setup_class, login_setup):
         '''{kwargs["title"]}'''
         # 接收和执行类级别前后置
-        self.homepage = inverst_setup_class
+        self.investpage = inverst_setup_class
         # 执行带入参用例级别前置
-        inverst_setup(self.homepage)
+        login_setup(self.investpage)
 
     
 

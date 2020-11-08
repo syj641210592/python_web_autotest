@@ -8,11 +8,13 @@ LastEditors: sunwang
 
 from html_page.page_locator import locator_inverst
 from html_page.base_page import BasePage
-import re
 class InverstPage(BasePage):
     '''
     description: 投资页面封装
     '''
+    def fresh(self):
+        '''刷新网页'''
+        super().fresh()
 
     def input_money(self, money):
         '''输入金额'''

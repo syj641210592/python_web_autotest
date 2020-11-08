@@ -8,7 +8,6 @@ LastEditors: sunwang
 from html_page.page_locator import locator_home
 from html_page.base_page import BasePage
 from com_func.confread import config
-import re
 class HomePage(BasePage):
     '''
     description: 登录页面封装

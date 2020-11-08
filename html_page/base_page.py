@@ -28,7 +28,10 @@ class BasePage(object):
         self.driver.implicitly_wait(20)
     def fresh(self, url=""):
         '''刷新网页'''
-        self.driver.get(url)
+        if url != "":
+            self.driver.get(url)
+        else:
+            self.driver.refresh()
 
     def find_ele(self, method="XPATH", pat="", pat_params="", type="located", wait_time=10):
         '''查找页面元素'''
