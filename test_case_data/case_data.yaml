@@ -24,6 +24,46 @@ test_login_data:
     expected: 我的帐户[python]
 
 test_invest_success_data: 
-  - title: 投资成功_金额正确
+  - title: 投资成功_金额正确_100
     money: 100
     expected: 投标成功！
+
+  - title: 投资成功_金额正确_1000
+    money: 1000
+    expected: 投标成功！
+
+
+test_invest_failed_un100_data: 
+  - title: 投资失败_金额非100的正整数倍_0
+    money: 0
+    expected: 请正确填写投标金额
+
+  - title: 投资失败_金额非100的正整数倍_10
+    money: 10
+    expected: 投标金额必须为100的倍数
+
+  - title: 投资失败_金额非100的正整数倍_-100
+    money: -100
+    expected: 请正确填写投标金额
+    
+
+test_invest_failed_un10_data: 
+  - title: 投资失败_金额非10的正整数倍_9
+    money: 9
+    expected: 请输入10的整数倍
+
+  - title: 投资失败_金额非10的正整数倍_11
+    money: 11
+    expected: 请输入10的整数倍
+
+  - title: 投资失败_金额非10的正整数倍_0.1
+    money: 0.1
+    expected: 请输入10的整数倍
+
+  - title: 投资失败_金额非100的正整数倍_99
+    money: 99
+    expected: 请输入10的整数倍
+
+  - title: 投资失败_金额非100的正整数倍_101
+    money: 101
+    expected: 请输入10的整数倍

@@ -17,6 +17,6 @@ class UserPage(BasePage):
 
     def get_user_amount(self):
         '''获取用户剩余金额'''
-        user_amount = self.find_ele(*locator_user.user_amount)[:-1]
+        user_amount = self.find_ele(*locator_user.user_amount).text[:-1]
         return user_amount
         

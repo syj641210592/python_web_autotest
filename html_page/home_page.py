@@ -5,9 +5,11 @@ Date: 2020-10-01 12:05:40
 LastEditTime: 2020-10-14 22:51:54
 LastEditors: sunwang
 '''
+
 from html_page.page_locator import locator_home
 from html_page.base_page import BasePage
 from com_func.confread import config
+import time
 class HomePage(BasePage):
     '''
     description: 登录页面封装
@@ -23,7 +25,8 @@ class HomePage(BasePage):
 
     def inverst(self):
         '''抢投标'''
-        self.find_ele(*locator_home.invest).click()     
+        self.find_ele(*locator_home.invest).click()
+        time.sleep(5)
         
     def quit_login(self):
         '''退出登录'''

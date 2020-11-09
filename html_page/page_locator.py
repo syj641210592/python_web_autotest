@@ -2,7 +2,7 @@
 Description: 定位元素locator
 Author: sunwang
 Date: 2020-10-02 06:50:13
-LastEditTime: 2020-10-29 21:44:45
+LastEditTime: 2020-11-09 22:21:51
 LastEditors: sunwang
 '''
 
@@ -29,7 +29,7 @@ class LocatorHome(object):
     '''
     def __init__(self):
         self.invest = ("XPATH", r'//span[text()=%s]/ancestor::div[2]//a[text()="抢投标"]' % config.get("PRESENT", "inverst_name"))  # 抢投标
-        self.islogin = ("XPATH", f"//a[text()={user}]")  # 登录用户显示
+        self.islogin = ("XPATH", f"//a[text()=%s]")  # 登录用户显示
         self.quit = ("XPATH", r'//a[text()="退出"]')  # 退出登录
 
 class LocatorInverst(object):
@@ -40,10 +40,10 @@ class LocatorInverst(object):
     '''
     def __init__(self):
         self.money_input = ("XPATH", r'//input[@class="form-control invest-unit-investinput"]')  # 金额输入
-        self.tender_button = ("XPATH", r'//button[text()="投标"]')  # 投标按钮
+        self.tender_button = ("XPATH", r'//button[@class="btn btn-special height_style"]')  # 投标按钮
         self.set_all = ("XPATH", r'//input[@class="set-all"]')  # 全投按钮
         self.error_windows = ("XPATH", r'//div[@id="layui-layer1"]//div[@class="text-center"]')  # 投资失败弹窗
-        self.success_windows = ("XPATH", r'//div[@id="layui-layer2"]//div[@class="capital_font1 note"]')  # 投资成功弹窗
+        self.success_windows = ("XPATH", r'//div[@id="layui-layer1"]//div[@class="capital_font1 note"]')  # 投资成功弹窗
         self.success_windows_onclick=("XPATH", r'//div[text()="投标成功！"]/..//button[text()="查看并激活"]')   # 投资成功弹窗查看并激活按钮
         
 class LocatorUser(object):

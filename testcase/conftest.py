@@ -37,24 +37,28 @@ def inverst_setup_class():
     '''投资测试类用例前后置'''
     # 生成驱动
     driver = Edge(executable_path=config.get("ENV", "drive_path"))
+    driver.maximize_window()
+    driver.implicitly_wait(20)
     # 登录
     loginpage = LoginPage(driver)
+    loginpage.fresh()
     loginpage.login(config.get("PRESENT", "phone"), config.get("PRESENT", "pwd"))
     # 主页进入抢投标
     homepage = HomePage(driver)
     homepage.inverst()
     # 投标页面
+    url = homepage.get_url()
     inverstpage = InverstPage(driver)
     # 用户页面
     userpage = UserPage(driver)
-    yield inverstpage, userpage  # 分割前后置的 yeild之前是前置方法，yeild之后是后置
+    yield inverstpage, url, userpage  # 分割前后置的 yeild之前是前置方法，yeild之后是后置
     inverstpage.quit_driver()
 
 
 @pytest.fixture()
-def login_setup():
+def inverst_setup():
     '''投资测试用例前后置'''
-    def _login_setup(page):
-        page.fresh()
-    yield _login_setup  # 分割前后置的 yeild之前是前置方法，yeild之后是后置
+    def _inverst_setup(page, url):
+        page.fresh(url)
+    yield _inverst_setup  # 分割前后置的 yeild之前是前置方法，yeild之后是后置
 

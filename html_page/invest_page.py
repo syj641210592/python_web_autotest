@@ -12,9 +12,9 @@ class InverstPage(BasePage):
     '''
     description: 投资页面封装
     '''
-    def fresh(self):
+    def fresh(self, url=""):
         '''刷新网页'''
-        super().fresh()
+        super().fresh(url)
 
     def input_money(self, money):
         '''输入金额'''
@@ -26,21 +26,21 @@ class InverstPage(BasePage):
 
     def tender_text(self):
         '''获取点击投资按钮上的文本提示'''
-        self.find_ele(*locator_inverst.tender_button).text
+        return self.find_ele(*locator_inverst.tender_button).text
 
     def get_tender_money(self):
         '''获取输入金额框内剩余可投标金额'''
-        money = self.find_ele(*locator_inverst.tender_money).get_attribute("data-amount")
+        money = self.find_ele(*locator_inverst.money_input).get_attribute("data-amount")
         # money = re.search(r".+?(\d+)元$", str(money)).group(1).replace(",","")
         return money
 
     def get_error_windows_info(self):
         '''获取投资失败提示窗口信息'''
-        self.find_ele(*locator_inverst.error_windows).text
+        return self.find_ele(*locator_inverst.error_windows).text
 
     def get_success_windows_info(self):
         '''获取投资成功提示窗口'''
-        self.find_ele(*locator_inverst.success_windows).text
+        return self.find_ele(*locator_inverst.success_windows).text
 
     def get_success_windows_onclick(self):
         '''点击投资成功提示窗口'''
