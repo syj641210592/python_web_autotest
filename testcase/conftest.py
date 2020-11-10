@@ -2,7 +2,7 @@
 Description: pytest.fixture文件
 Author: sunwang
 Date: 2020-10-10 21:46:54
-LastEditTime: 2020-11-08 23:15:07
+LastEditTime: 2020-11-10 21:05:53
 LastEditors: sunwang
 '''
 
@@ -19,7 +19,8 @@ import pytest
 def login_setup_class():
     '''登录测试类用例前后置'''
     driver = Edge(executable_path=config.get("ENV", "drive_path"))
-
+    driver.maximize_window()
+    driver.implicitly_wait(20)
     loginpage= LoginPage(driver)
     yield loginpage  # 分割前后置的 yeild之前是前置方法，yeild之后是后置
     driver.quit()

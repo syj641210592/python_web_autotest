@@ -62,3 +62,27 @@ Traceback (most recent call last):
     raise TimeoutException(message, screen, stacktrace)
 selenium.common.exceptions.TimeoutException: Message: 
 
+2020-11-10 21:07:43,200 - [base_page.py-->line:55] - ERROR: 查找页面元素//li[@class="color_sub"]失败
+Traceback (most recent call last):
+  File "C:\工具资料\GitHub\python_web_autotest\html_page\base_page.py", line 49, in find_ele
+    self.ele = WebDriverWait(self.driver, wait_time).until(EC.presence_of_element_located((getattr(By, method), pat)))
+  File "C:\Users\64121\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+2020-11-10 21:08:13,494 - [base_page.py-->line:55] - ERROR: 查找页面元素//li[@class="color_sub"]失败
+Traceback (most recent call last):
+  File "C:\工具资料\GitHub\python_web_autotest\html_page\base_page.py", line 49, in find_ele
+    self.ele = WebDriverWait(self.driver, wait_time).until(EC.presence_of_element_located((getattr(By, method), pat)))
+  File "C:\Users\64121\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+2020-11-10 21:08:43,707 - [base_page.py-->line:55] - ERROR: 查找页面元素//li[@class="color_sub"]失败
+Traceback (most recent call last):
+  File "C:\工具资料\GitHub\python_web_autotest\html_page\base_page.py", line 49, in find_ele
+    self.ele = WebDriverWait(self.driver, wait_time).until(EC.presence_of_element_located((getattr(By, method), pat)))
+  File "C:\Users\64121\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
