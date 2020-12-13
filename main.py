@@ -1,11 +1,13 @@
 '''
-Description: wen自动化
+Description: web自动化
 Author: sunwang
 Date: 2020-09-14 21:04:05
-LastEditTime: 2020-11-10 21:06:53
+LastEditTime: 2020-12-13 21:56:54
 LastEditors: sunwang
 '''
 
 
 import pytest
-pytest.main(['-s', '-v', "--html", "report.html", "--reruns", "3", "--reruns-delay", "5"])
+import os
+pytest.main(['-s', '-v', "--reruns", "3", "--reruns-delay", "5" , "--alluredir=result/report"])
+os.system('--alluredir=result/report')

@@ -9,7 +9,6 @@ LastEditors: sunwang
 
 
 from com_func.basepath import testpath
-from com_func.log import logger
 import yaml
 import pytest
 

@@ -1,0 +1,1 @@
+{"uuid": "48894091-d059-4e2b-93b8-6e430c37fccf", "children": ["bad4b033-4361-4166-9633-88eaed7048fe"], "befores": [{"name": "inverst_setup", "status": "passed", "start": 1607737328927, "stop": 1607737328927}], "afters": [{"name": "inverst_setup::0", "status": "passed", "start": 1607737328946, "stop": 1607737328948}], "start": 1607737328927, "stop": 1607737328948}
