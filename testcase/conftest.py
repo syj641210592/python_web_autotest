@@ -2,7 +2,7 @@
 Description: pytest.fixture文件
 Author: sunwang
 Date: 2020-10-10 21:46:54
-LastEditTime: 2020-11-10 21:05:53
+LastEditTime: 2020-12-15 22:54:47
 LastEditors: sunwang
 '''
 
@@ -12,13 +12,30 @@ from html_page.home_page import HomePage
 from html_page.invest_page import InverstPage
 from html_page.user_page import UserPage
 from com_func.confread import config
-from selenium.webdriver import Edge 
+from selenium import webdriver 
 import pytest
+
+def creat_driver():
+    '''根据配置文件设置 生成浏览器驱动'''
+    browse = config.get("RUN", "browse")  # 获取浏览器名
+    driver_path = config.get("RUN", "drive_path")  # 获取驱动路径
+    # 根据浏览器生成驱动
+    if browse.lower() == 'chrome':
+        options = webdriver.ChromeOptions()  
+        if config.getboolean("RUN", "headless"):
+            options.add_argument("headless")  # 无头模式
+            options.add_argument('--disable-gpu')  # 禁用GPU
+            options.add_argument('--no-sandbox')  # 非沙箱环境
+        driver = webdriver.Chrome(executable_path=driver_path, options=options)  # 生成驱动
+    elif browse.lower() == 'edge':
+        driver = webdriver.Edge(executable_path=driver_path)  # 生成驱动
+
+    return driver
 
 @pytest.fixture(scope='class')
 def login_setup_class():
     '''登录测试类用例前后置'''
-    driver = Edge(executable_path=config.get("ENV", "drive_path"))
+    driver = creat_driver()
     driver.maximize_window()
     driver.implicitly_wait(20)
     loginpage= LoginPage(driver)
@@ -37,7 +54,7 @@ def login_setup():
 def inverst_setup_class():
     '''投资测试类用例前后置'''
     # 生成驱动
-    driver = Edge(executable_path=config.get("ENV", "drive_path"))
+    driver = creat_driver()
     driver.maximize_window()
     driver.implicitly_wait(20)
     # 登录
